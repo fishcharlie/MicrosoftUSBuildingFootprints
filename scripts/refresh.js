@@ -59,8 +59,10 @@ const states = [
 ];
 
 (async () => {
-	await Promise.all(states.map((state) => {
-		return new Promise(async (resolve, reject) => {
+	for (let i = 0; i < states.length; i++) {
+		const state = states[i];
+
+		const promise = () => new Promise(async (resolve, reject) => {
 			const url = `https://usbuildingdata.blob.core.windows.net/usbuildings-v2/${state}.geojson.zip`;
 
 			const dataStream = await axios.request({
@@ -87,5 +89,6 @@ const states = [
 				}
 			});
 		});
-	}));
+		await promise();
+	}
 })();
