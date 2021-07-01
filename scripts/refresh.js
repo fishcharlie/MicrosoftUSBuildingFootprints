@@ -61,6 +61,7 @@ const states = [
 (async () => {
 	for (let i = 0; i < states.length; i++) {
 		const state = states[i];
+		console.log(`Starting ${state}`);
 
 		const promise = () => new Promise(async (resolve, reject) => {
 			const url = `https://usbuildingdata.blob.core.windows.net/usbuildings-v2/${state}.geojson.zip`;
@@ -90,5 +91,7 @@ const states = [
 			});
 		});
 		await promise();
+
+		console.log(`Finished ${state}\n\n`);
 	}
 })();
